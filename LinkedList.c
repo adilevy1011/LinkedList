@@ -17,6 +17,7 @@ struct node* createNode(int val) {
     totalCount++;
     return newNode;
 }
+
 void addNode(int val) {
     struct node* newNode = createNode(val);
 
@@ -30,6 +31,7 @@ void addNode(int val) {
         current->next = newNode;  // link new node at the end
     }
 }
+
 void changeValueOfNode(int location, int val){ 
     if(location < totalCount && location >= 0){
         struct node* current = head;
@@ -41,6 +43,61 @@ void changeValueOfNode(int location, int val){
         printf("invalid input\n");
     }
 }
+
+int getValueOfNode(int location){
+    if(location < totalCount && location >= 0){
+        struct node* current = head;
+        for(int i = 0; i < location; i++){
+            current = current->next;
+        }
+        return current->value;
+    } else{
+        printf("invalid input\n");
+    }
+}
+
+void removeNode(int location){
+    if(location < totalCount && location >= 0){
+        if(location == 0){
+            struct node* temp = head;
+            head = head->next;
+            free(temp);
+            totalCount--;
+            return;
+        }
+        struct node* current = head;
+        for(int i = 0; i < location-1; i++){
+            current = current->next;
+        }
+        struct node* temp = current->next; 
+        current->next = current->next->next;
+        free(temp);
+        totalCount--;
+    } else{
+        printf("invalid input\n");
+    }
+}
+
+void removeByValue(int value){
+    if(head != NULL){
+        while (head->value == value){
+            struct node* temp = head;
+            head = head->next;
+            free(temp);
+            totalCount--;
+        }
+    }
+    struct node* current = head;
+    while(current->next != NULL){
+        if(current->next->value == value){
+            struct node* temp = current->next;
+            current->next = current -> next -> next;
+            free(temp);
+            totalCount--;
+        } else current = current->next;
+    }
+}
+
 void printChain() {
     struct node* current = head;
     while (current != NULL) {
@@ -48,13 +105,47 @@ void printChain() {
         current = current->next;
     }
 }
+
+void addNodeToLocation(int location, int val){
+    if(location <= 0){
+        struct node* newNode = createNode(val);
+        newNode->next = head;
+        head = newNode;
+        return;
+    }
+    if(location>=totalCount){
+        addNode(val);
+        return;
+    }
+    struct node* current = head;
+    for(int i = 0; i < location-1; i++){
+        current = current->next;
+    }
+    struct node* temp = current->next;
+    struct node* newNode = createNode(val);
+    current->next = newNode;
+    newNode->next = temp;
+    
+}
+
 int main() {
-    addNode(5);
-    addNode(10);
-    addNode(15);
+    for(int i = 0; i < 6; i++){
+        addNode(i);
+    }
+    printf("before\n");
     printChain();
-    changeValueOfNode(2,40);
+    printf("after\n");
+    addNodeToLocation(2,99);
     printChain();
+    removeNode(2);
+    printf("\n");
+    printChain();
+
+    int sum = 0;
+    for(int i = 0; i < totalCount; i++){
+        sum += getValueOfNode(i);
+    }
+    printf("sum of all nodes value: %d\n", sum);
     return 0;
 }
 
