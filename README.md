@@ -4,14 +4,18 @@
 Adi Levy
 
 ## Description
-This project is my first implementation of a linked list in C. It was created to practice pointers, structs, and dynamic memory management.
+This project implements a singly linked list in C to practice pointers, structs, and dynamic memory management. 
+It includes advanced operations beyond simple insertion, providing a foundation for understanding low-level data structures.
 
 ## Features
-- Singly linked list
-- Insert, delete, traverse operations
-- Manual memory management with malloc/free
+- Add node at the end or at a specific index
+- Remove node by index or by value
+- Update value of a specific node
+- Retrieve value of a specific node
+- Print all node values
+- Compute sum of all nodes
 
-## How to Compile
+## How to Compile and Run
 ```bash
-gcc linkedlist.c -o linkedlist
-./linkedlist
+gcc linkedList.c -o linkedList
+./linkedList
