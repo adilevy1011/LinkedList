@@ -19,7 +19,7 @@ It includes advanced operations beyond simple insertion, providing a foundation 
 ```bash
 gcc linkedList.c -o linkedList
 ./linkedList
-
+```
 ## What I learned
 - How to manage dynamic memory manually using malloc and free
 - How to use pointers to navigate and manipulate linked data structures
